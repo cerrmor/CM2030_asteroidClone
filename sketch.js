@@ -1,3 +1,6 @@
+//canvas veriable
+var c;
+
 var spaceship;
 var asteroids;
 var atmosphereLoc;
@@ -10,7 +13,8 @@ var gameScore;
 
 //////////////////////////////////////////////////
 function setup() {
-  createCanvas(1200,800);
+  c = createCanvas(1200,800);
+  c.parent('canvas');
   spaceship = new Spaceship();
   asteroids = new AsteroidSystem();
   //creates an instance of gameScore
@@ -56,7 +60,6 @@ function drawEarth(){
 function checkCollisions(spaceship, asteroids){
 
     //spaceship-2-asteroid collisions
-    //YOUR CODE HERE (2-3 lines approx)
     for(var i = 0; i < asteroids.locations.length; ++i)
     {
       if(isInside(spaceship.location, spaceship.size, asteroids.locations[i], asteroids.diams[i]))
@@ -65,7 +68,6 @@ function checkCollisions(spaceship, asteroids){
       }
     }
     //asteroid-2-earth collisions
-    //YOUR CODE HERE (2-3 lines approx)
     for(var i = 0; i < asteroids.locations.length; ++i)
     {
       if(isInside(earthLoc, earthSize.x, asteroids.locations[i], asteroids.diams[i]))
@@ -74,20 +76,17 @@ function checkCollisions(spaceship, asteroids){
       }
     }
     //spaceship-2-earth
-    //YOUR CODE HERE (1-2 lines approx)
     if(isInside(earthLoc, earthSize.x, spaceship.location, spaceship.size))
     {
       gameOver();
     }
     //spaceship-2-atmosphere
-    //YOUR CODE HERE (1-2 lines approx)
     if(isInside(atmosphereLoc, atmosphereSize.x, spaceship.location, spaceship.size))
     {
       spaceship.setNearEarth();
     }
 
     //bullet collisions
-    //YOUR CODE HERE (3-4 lines approx)
     for(var j = spaceship.bulletSys.bullets.length; j > 0; --j)
     {
       for(var i = asteroids.locations.length; i > 0 ; --i)
@@ -105,7 +104,6 @@ function checkCollisions(spaceship, asteroids){
 //////////////////////////////////////////////////
 //helper function checking if there's collision between object A and object B
 function isInside(locA, sizeA, locB, sizeB){
-    // YOUR CODE HERE (3-5 lines approx)
     if(dist(locA.x, locA.y, locB.x, locB.y) < ((sizeA/2)+(sizeB/2))) 
     {
       return true;
